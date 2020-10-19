@@ -1,0 +1,8 @@
+<launch>
+
+<node pkg="rviz" type="rviz" name="rviz" args="-d $(find rrt_exploration_201016)/launch/includes/three.rviz">
+<remap from="move_base_simple/goal" to="robot1/move_base_simple/goal"/>
+</node>
+
+
+</launch>

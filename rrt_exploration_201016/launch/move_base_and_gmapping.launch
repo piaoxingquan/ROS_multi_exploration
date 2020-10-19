@@ -1,0 +1,26 @@
+<launch>
+<arg name="count" default="1"/>
+
+
+<group ns="robot$(arg count)">
+
+
+<include file="$(find rrt_exploration_201016)/launch/includes/gmapping.launch" >
+    <arg name="robot_name" value="robot$(arg count)" />
+</include>
+
+<include file="$(find rrt_exploration_201016)/launch/includes/move_base.launch.xml" >
+    <arg name="robot_name" value="robot$(arg count)" />
+</include>
+
+
+
+</group>
+
+<!-- recursive call -->
+  <include file="$(find rrt_exploration_201016)/launch/move_base_and_gmapping.launch" if="$(eval arg('count') > 1)">
+    <arg name="count" value="$(eval arg('count') - 1)" />
+  </include>
+
+
+</launch>

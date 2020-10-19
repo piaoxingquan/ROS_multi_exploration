@@ -1,0 +1,15 @@
+<launch>
+
+<arg name="count" default="1"/>
+<arg name="temp" value="$(eval arg('count')-1)" />
+
+<node pkg="tf" type="static_transform_publisher" name="robot$(arg count)_to_robot1" args="-$(arg temp) 0 0 0 0 0 /robot1/map /robot$(arg count)/map 20"/>
+
+
+
+<!-- recursive call -->
+  <include file="$(find rrt_exploration_201016)/launch/robot_tf_transform.launch" if="$(eval arg('count') > 2)">
+    <arg name="count" value="$(eval arg('count') - 1)" />
+  </include>
+
+</launch>
